@@ -1,0 +1,100 @@
+<body>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        #baloniki {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: rgb(255, 194, 237);
+            z-index: 1;
+        }
+
+        #baloniki img {
+            opacity: 90%;
+            position: absolute;
+            width: 120px;
+            height: 160px;
+        }
+
+        #lc,
+        #rc {
+            position: absolute;
+            z-index: 3;
+            width: 150px;
+            height: 150px;
+            bottom: 0;
+        }
+
+        #lc {
+            left: 0;
+        }
+
+        #rc {
+            transform: scaleX(-1);
+            right: 0;
+        }
+    </style>
+    <img id='lc' src="assets/cannon.png">
+    <div id='baloniki'>
+        <img><img><img><img><img><img>
+        <img><img><img><img><img><img>
+        <img><img><img><img><img><img>
+        <img><img><img><img><img><img>
+        <img><img><img><img><img><img>
+        <img><img><img><img><img><img>
+        <img><img><img><img><img><img>
+        <img><img><img><img><img><img>
+        <img><img><img><img><img><img>
+        <img><img><img><img><img><img>
+        <img><img><img><img><img><img>
+        <img><img><img><img><img><img>
+        <img><img><img><img><img><img>
+    </div>
+    <img id='rc' src="assets/cannon.png">
+    <script>
+        let baloniki = document.getElementById('baloniki').children;
+        let ct = 0;
+        for (let i = 0; i < baloniki.length; i++) {
+            let seed = Math.random();
+            baloniki[i].animate([
+                { left: `${(seed > 0.5 ? 85 : 10)}%`, bottom: '10%' },
+                { left: `${seed * 100 + (seed > 0.5 ? -35 : 35)}%`, bottom: '100%' }
+            ], {
+                iterations: Infinity,
+                duration: seed * 3000 + 3000,
+                easing: `cubic-bezier(0.2,${Math.random() * 0.5 + 0.5},0,0.5)`,
+                fill: 'both'
+            })
+            switch (ct) {
+                case 7:
+                    baloniki[i].style.content = "url('assets/balonik_bi.png')";
+                    break;
+                case 6:
+                    baloniki[i].style.content = "url('assets/balonik_bl.png')";
+                    break;
+                case 5:
+                    baloniki[i].style.content = "url('assets/balonik_c.png')";
+                    break;
+                case 4:
+                    baloniki[i].style.content = "url('assets/balonik_f.png')";
+                    break;
+                case 3:
+                    baloniki[i].style.content = "url('assets/balonik_n.png')";
+                    break;
+                case 2:
+                    baloniki[i].style.content = "url('assets/balonik_r.png')";
+                    break;
+                case 1:
+                    baloniki[i].style.content = "url('assets/balonik_y.png')";
+                    break;
+                case 0:
+                    baloniki[i].style.content = "url('assets/balonik_z.png')";
+                    break;
+            }
+            ct = (ct + 1) % 8;
+        }
+    </script>
+</body>
